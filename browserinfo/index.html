@@ -41,6 +41,10 @@
             const href = window.location.href;
             let url = new URL(href);
 
+            if(url.searchParams.has('screenHeight')) {
+                return;
+            }
+
             for (const [key, value] of Object.entries(browserInfo)) {
                 url.searchParams.set(key, value);
             }
