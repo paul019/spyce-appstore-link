@@ -22,21 +22,35 @@
             const timeZoneOffset = d.getTimezoneOffset();
 
             const browserInfo = {
-                screenWidth,
-                screenHeight,
-                colorDepth,
-                userAgent,
-                timeZoneOffset,
-                language,
                 javaEnabled,
+                language,
+                colorDepth,
+                screenHeight,
+                screenWidth,
+                timeZoneOffset,
+                userAgent,
             };
 
             return browserInfo;
         }
     </script>
+    <script>
+        function Redirect() {
+            const browserInfo = collectBrowserInfo();
+
+            const href = window.location.href;
+            let url = new URL(href);
+
+            for (const [key, value] of Object.entries(browserInfo)) {
+                url.searchParams.set(key, value);
+            }
+
+            window.location.href = url.href;
+        }
+    </script>
 </head>
 
-<body onload="console.log(collectBrowserInfo())">
+<body onload="Redirect()">
 </body>
 
 </html>
