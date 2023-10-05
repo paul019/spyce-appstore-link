@@ -1,0 +1,39 @@
+<?php
+function add_onload() {
+?>
+
+<script>
+function getMobileOperatingSystem() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    if (/android/i.test(userAgent)) {
+        return "Android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS";
+    }
+
+    return "unknown";
+}</script>
+
+<script>
+function DetectAndServe(){
+    let os = getMobileOperatingSystem();
+    if (os == "Android") {
+        window.location.href = "https://paul019.github.io/spyce-appstore-link/android/"; 
+    } else if (os == "iOS") {
+        window.location.href = "https://paul019.github.io/spyce-appstore-link/ios/"; 
+    } else {
+        window.location.href = "https://spyce.app";
+    }
+}
+</script>
+
+<script type="text/javascript">
+  document.getElementsByTagName('body')[0].onload = DetectAndServe;
+</script>
+
+<?php
+}
